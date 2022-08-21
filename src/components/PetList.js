@@ -13,32 +13,21 @@ const cody = {
 function PetList(props) {
   const [selected, setSelected] = React.useState('all');
 
-  React.useEffect(() => {
-    switch (selected) {
-      case 'all':
-        console.log('all selected')
-        document.querySelector('.pet-list').appendChild = props.pets.map(pet => <SinglePet key={pet.id} pet={pet}/>).join('');
-        break;
-      case 'cats':
-        console.log('cats selected')
-        document.querySelector('.pet-list').appendChild = props.pets.map(pet => <SinglePet key={pet.id} pet={pet}/>).filter(pet => pet.species === 'cat').join('');
-        break;
-      case 'dogs':
-        console.log('dogs selected')
-        document.querySelector('.pet-list').appendChild = props.pets.map(pet => <SinglePet key={pet.id} pet={pet}/>).filter(pet => pet.species === 'dog').join('');
-        break;
-    }
-  }, [selected])
+  const handleSelected = function(event) {
+    setSelected(event.target.value);
+  }
 
   return (
     <>
-      <select>
-        <option onClick={() => setSelected('all')}>All</option>
-        <option onClick={() => setSelected('cats')}>Cats</option>
-        <option onClick={() => setSelected('dogs')}>Dogs</option>
+      <select value={selected} onChange={handleSelected}>
+        <option value='all'>All</option>
+        <option value='cat'>Cats</option>
+        <option value='dog'>Dogs</option>
       </select>
       <div className="pet-list">
-        {props.pets.map(pet => <SinglePet key={pet.id} pet={pet}/>)}
+        {/* if all pets are selected, will render all. otherwise will render the pet type selected */}
+        {selected === 'all' ? props.pets.map(pet => <SinglePet key={pet.id} pet={pet}/>) :
+          props.pets.map(pet => { if (pet.species === selected ) return <SinglePet key={pet.id} pet={pet}/>})}
       </div>
     </>
   )

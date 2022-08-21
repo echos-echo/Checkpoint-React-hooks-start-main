@@ -43,59 +43,28 @@ function PetList(props) {
       selected = _React$useState2[0],
       setSelected = _React$useState2[1];
 
-  react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {
-    switch (selected) {
-      case 'all':
-        console.log('all selected');
-        document.querySelector('.pet-list').appendChild = props.pets.map(function (pet) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SinglePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            key: pet.id,
-            pet: pet
-          });
-        }).join('');
-        break;
+  var handleSelected = function handleSelected(event) {
+    setSelected(event.target.value);
+  };
 
-      case 'cats':
-        console.log('cats selected');
-        document.querySelector('.pet-list').appendChild = props.pets.map(function (pet) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SinglePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            key: pet.id,
-            pet: pet
-          });
-        }).filter(function (pet) {
-          return pet.species === 'cat';
-        }).join('');
-        break;
-
-      case 'dogs':
-        console.log('dogs selected');
-        document.querySelector('.pet-list').appendChild = props.pets.map(function (pet) {
-          return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SinglePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
-            key: pet.id,
-            pet: pet
-          });
-        }).filter(function (pet) {
-          return pet.species === 'dog';
-        }).join('');
-        break;
-    }
-  }, [selected]);
-  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    onClick: function onClick() {
-      return setSelected('all');
-    }
+  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("select", {
+    value: selected,
+    onChange: handleSelected
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
+    value: "all"
   }, "All"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    onClick: function onClick() {
-      return setSelected('cats');
-    }
+    value: "cat"
   }, "Cats"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("option", {
-    onClick: function onClick() {
-      return setSelected('dogs');
-    }
+    value: "dog"
   }, "Dogs")), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: "pet-list"
-  }, props.pets.map(function (pet) {
+  }, selected === 'all' ? props.pets.map(function (pet) {
     return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SinglePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
+      key: pet.id,
+      pet: pet
+    });
+  }) : props.pets.map(function (pet) {
+    if (pet.species === selected) return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_SinglePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
       key: pet.id,
       pet: pet
     });
