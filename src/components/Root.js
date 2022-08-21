@@ -11,8 +11,7 @@ const Root = () => {
 
   React.useEffect(() => {
     const getPets = async () => {
-      const data = (await axios.get('/api/pets')).data;
-      setPetData(data);
+      setPetData((await axios.get('/api/pets')).data);
     };
     getPets();
   }, []);
@@ -20,7 +19,7 @@ const Root = () => {
   return (
     <>
       <h1>Adoption Center</h1>
-      <PetList pets={petData} />
+      { petData.length > 0 ? <PetList pets={petData}/> : <p>Loading Pets...</p>}
     </>
   )
 }
