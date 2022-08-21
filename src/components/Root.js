@@ -7,11 +7,16 @@ import axios from 'axios';
 // import samplePets from '../petdata';
 
 const Root = () => {
+  const [errMessage, setErr] = React.useState(null);
   const [petData, setPetData] = React.useState([]);
 
   React.useEffect(() => {
     const getPets = async () => {
-      setPetData((await axios.get('/api/pets')).data);
+      try {
+        setPetData((await axios.get('/api/pets')).data);
+      } catch(err) {
+        setErr(`${err.code}: ${err.message}`);
+      }
     };
     getPets();
   }, []);
@@ -19,7 +24,8 @@ const Root = () => {
   return (
     <>
       <h1>Adoption Center</h1>
-      { petData.length > 0 ? <PetList pets={petData}/> : <p>Loading Pets...</p>}
+      { petData.length > 0 ? <PetList pets={petData}/> :
+      errMessage != null ? <p>{errMessage}</p> : <p>Loading Pets...</p>}
     </>
   )
 }

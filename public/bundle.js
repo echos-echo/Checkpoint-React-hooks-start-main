@@ -2579,10 +2579,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // import samplePets from '../petdata';
 
 var Root = function Root() {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState([]),
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState(null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
-      petData = _React$useState2[0],
-      setPetData = _React$useState2[1];
+      errMessage = _React$useState2[0],
+      setErr = _React$useState2[1];
+
+  var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default().useState([]),
+      _React$useState4 = _slicedToArray(_React$useState3, 2),
+      petData = _React$useState4[0],
+      setPetData = _React$useState4[1];
 
   react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {
     var getPets = /*#__PURE__*/function () {
@@ -2591,20 +2596,28 @@ var Root = function Root() {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                _context.prev = 0;
                 _context.t0 = setPetData;
-                _context.next = 3;
+                _context.next = 4;
                 return axios__WEBPACK_IMPORTED_MODULE_2___default().get('/api/pets');
 
-              case 3:
+              case 4:
                 _context.t1 = _context.sent.data;
                 (0, _context.t0)(_context.t1);
+                _context.next = 11;
+                break;
 
-              case 5:
+              case 8:
+                _context.prev = 8;
+                _context.t2 = _context["catch"](0);
+                setErr("".concat(_context.t2.code, ": ").concat(_context.t2.message));
+
+              case 11:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee);
+        }, _callee, null, [[0, 8]]);
       }));
 
       return function getPets() {
@@ -2616,7 +2629,7 @@ var Root = function Root() {
   }, []);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement((react__WEBPACK_IMPORTED_MODULE_0___default().Fragment), null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, "Adoption Center"), petData.length > 0 ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_PetList__WEBPACK_IMPORTED_MODULE_1__["default"], {
     pets: petData
-  }) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Loading Pets..."));
+  }) : errMessage != null ? /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, errMessage) : /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, "Loading Pets..."));
 };
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Root);
