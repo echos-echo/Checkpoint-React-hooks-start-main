@@ -2664,11 +2664,15 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 function SinglePet(props) {
-  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState(false),
+  // selected will be true if there is a true in localStorage, which will evaluate the expression to true
+  var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState(localStorage.getItem(props.pet.name) === 'true'),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       adoptionStatus = _React$useState2[0],
       setAdoptionStatus = _React$useState2[1];
 
+  react__WEBPACK_IMPORTED_MODULE_0___default().useEffect(function () {
+    localStorage.setItem(props.pet.name, adoptionStatus);
+  }, [adoptionStatus]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
     className: adoptionStatus ? "single-pet adopted" : "single-pet"
   }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, props.pet.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, props.pet.species), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, props.pet.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, adoptionStatus ? "Adopted!" : "Available"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {

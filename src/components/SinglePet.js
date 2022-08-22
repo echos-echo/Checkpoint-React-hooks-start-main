@@ -1,7 +1,12 @@
 import React from 'react';
 
 function SinglePet(props) {
-  const [adoptionStatus, setAdoptionStatus] = React.useState(false);
+  // selected will be true if there is a true in localStorage, which will evaluate the expression to true
+  const [adoptionStatus, setAdoptionStatus] = React.useState(localStorage.getItem(props.pet.name) === 'true');
+
+  React.useEffect(() => {
+    localStorage.setItem(props.pet.name, adoptionStatus);
+  }, [adoptionStatus])
 
   return (
     <div className={adoptionStatus ? `single-pet adopted` : `single-pet` }>
