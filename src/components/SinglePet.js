@@ -1,4 +1,5 @@
 import React from 'react';
+import DeletePet from './DeletePet';
 
 function SinglePet(props) {
   // selected will be true if there is a true in localStorage, which will evaluate the expression to true
@@ -10,6 +11,8 @@ function SinglePet(props) {
 
   return (
     <div className={adoptionStatus ? `single-pet adopted` : `single-pet` }>
+      <DeletePet id={props.pet.id}/>
+      <hr/>
       <h1>{props.pet.name}</h1>
       <p>{props.pet.species}</p>
       <p>{props.pet.description}</p>
