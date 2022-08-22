@@ -13,9 +13,19 @@ const DeletePet = (props) => {
         }
     }
 
+    React.useEffect(() => {
+        if (deleted === true) {
+        console.log('pet removed')
+        const removedPet = document.getElementById(props.petId);
+        removedPet.parentNode.removeChild(removedPet);}
+    }, [deleted]);
+
     return (
         <div>
-            <button onClick={() => tryRemovePet(props.id)}>Remove Pet From List</button>
+            <button onClick={() => {
+                tryRemovePet(props.petId);
+                setDeleted(true);
+                }}>Remove Pet From List</button>
         </div>
     )
 };

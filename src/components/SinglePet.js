@@ -10,8 +10,8 @@ function SinglePet(props) {
   }, [adoptionStatus])
 
   return (
-    <div className={adoptionStatus ? `single-pet adopted` : `single-pet` }>
-      <DeletePet id={props.pet.id}/>
+    <div className={adoptionStatus ? `single-pet adopted` : `single-pet` } id={props.pet.id}>
+      <DeletePet petId={props.pet.id}/>
       <hr/>
       <h1>{props.pet.name}</h1>
       <p>{props.pet.species}</p>

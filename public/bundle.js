@@ -2538,9 +2538,17 @@ var DeletePet = function DeletePet(props) {
     };
   }();
 
+  react__WEBPACK_IMPORTED_MODULE_1___default().useEffect(function () {
+    if (deleted === true) {
+      console.log('pet removed');
+      var removedPet = document.getElementById(props.petId);
+      removedPet.parentNode.removeChild(removedPet);
+    }
+  }, [deleted]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
     onClick: function onClick() {
-      return tryRemovePet(props.id);
+      tryRemovePet(props.petId);
+      setDeleted(true);
     }
   }, "Remove Pet From List"));
 };
@@ -2763,9 +2771,10 @@ function SinglePet(props) {
     localStorage.setItem(props.pet.name, adoptionStatus);
   }, [adoptionStatus]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("div", {
-    className: adoptionStatus ? "single-pet adopted" : "single-pet"
-  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_DeletePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    className: adoptionStatus ? "single-pet adopted" : "single-pet",
     id: props.pet.id
+  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement(_DeletePet__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    petId: props.pet.id
   }), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("h1", null, props.pet.name), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, props.pet.species), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, props.pet.description), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("hr", null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("p", null, adoptionStatus ? "Adopted!" : "Available"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0___default().createElement("button", {
     onClick: function onClick() {
       return setAdoptionStatus(!adoptionStatus);
