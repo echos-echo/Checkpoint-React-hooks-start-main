@@ -11,6 +11,7 @@ function SinglePet(props) {
 
   return (
     <div className={adoptionStatus ? `single-pet adopted` : `single-pet` } id={props.pet.id}>
+      {/* the wrapping div has the attached id so the delete button can find the element (this pet) to delete */}
       <DeletePet petId={props.pet.id}/>
       <hr/>
       <h1>{props.pet.name}</h1>

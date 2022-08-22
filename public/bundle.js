@@ -2504,7 +2504,8 @@ var DeletePet = function DeletePet(props) {
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_1___default().useState(false),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       deleted = _React$useState2[0],
-      setDeleted = _React$useState2[1];
+      setDeleted = _React$useState2[1]; // async function to make the delete request
+
 
   var tryRemovePet = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime().mark(function _callee(petId) {
@@ -2539,10 +2540,10 @@ var DeletePet = function DeletePet(props) {
   }();
 
   react__WEBPACK_IMPORTED_MODULE_1___default().useEffect(function () {
-    if (deleted === true) {
-      console.log('pet removed');
+    // if the deleted state was triggered, the node with this button inside it will be removed
+    if (deleted) {
       var removedPet = document.getElementById(props.petId);
-      removedPet.parentNode.removeChild(removedPet);
+      document.getElementById(props.petId).parentNode.removeChild(removedPet);
     }
   }, [deleted]);
   return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("div", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_1___default().createElement("button", {
@@ -2594,6 +2595,7 @@ var cody = {
 // passed in as props.pets. Don't forget to add a unique key to each one!
 
 function PetList(props) {
+  // state that controls which pet species is selected
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState('all'),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       selected = _React$useState2[0],
@@ -2674,10 +2676,12 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 // import samplePets from '../petdata';
 
 var Root = function Root() {
+  // the state of the error message, if there is any
   var _React$useState = react__WEBPACK_IMPORTED_MODULE_0___default().useState(null),
       _React$useState2 = _slicedToArray(_React$useState, 2),
       errMessage = _React$useState2[0],
-      setErr = _React$useState2[1];
+      setErr = _React$useState2[1]; // the state of pet data, fetched in useEffect
+
 
   var _React$useState3 = react__WEBPACK_IMPORTED_MODULE_0___default().useState([]),
       _React$useState4 = _slicedToArray(_React$useState3, 2),
@@ -2705,6 +2709,7 @@ var Root = function Root() {
               case 8:
                 _context.prev = 8;
                 _context.t2 = _context["catch"](0);
+                // if an error occurs, the code and message are saved to errMessage state
                 setErr("".concat(_context.t2.code, ": ").concat(_context.t2.message));
 
               case 11:
@@ -2718,7 +2723,8 @@ var Root = function Root() {
       return function getPets() {
         return _ref.apply(this, arguments);
       };
-    }();
+    }(); // attempts to get the pets
+
 
     getPets();
   }, []);

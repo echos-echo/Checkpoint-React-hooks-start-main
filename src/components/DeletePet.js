@@ -4,6 +4,7 @@ import React from 'react';
 const DeletePet = (props) => {
     const [deleted, setDeleted] = React.useState(false);
 
+    // async function to make the delete request
     const tryRemovePet = async petId => {
         try {
             await axios.delete(`/api/pets/${petId}`);
@@ -14,18 +15,16 @@ const DeletePet = (props) => {
     }
 
     React.useEffect(() => {
-        if (deleted === true) {
-        console.log('pet removed')
+        // if the deleted state was triggered, the node with this button inside it will be removed
+        if (deleted) {
         const removedPet = document.getElementById(props.petId);
-        removedPet.parentNode.removeChild(removedPet);}
+        document.getElementById(props.petId).parentNode.removeChild(removedPet);}
     }, [deleted]);
 
     return (
         <div>
-            <button onClick={() => {
-                tryRemovePet(props.petId);
-                setDeleted(true);
-                }}>Remove Pet From List</button>
+            {/* when the delete button is clicked, it will both remove and set the state to true */}
+            <button onClick={() => {tryRemovePet(props.petId); setDeleted(true);}}>Remove Pet From List</button>
         </div>
     )
 };

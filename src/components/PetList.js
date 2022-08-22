@@ -11,6 +11,7 @@ const cody = {
 // PetList only renders one SinglePet. We'd like it to render a list of pets,
 // passed in as props.pets. Don't forget to add a unique key to each one!
 function PetList(props) {
+  // state that controls which pet species is selected
   const [selected, setSelected] = React.useState('all');
 
   const handleSelected = function(event) {
